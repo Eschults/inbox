@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :messages
 
   def conversations
-    Conversation.where("conversations.user1_id = :id OR conversations.user2_id = :id", id: id)
+    Conversation.includes(:messages).where("user1_id = :id OR user2_id = :id", id: id)
   end
 
   def other_user(conversation)
@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
   def unread_conversations
-    conversations.joins(:messages).where("messages.read_at = ?", nil)
+    conversations.select { |c| c.unread_messages?(self) }
   end
 
   def unread_conversations_count
