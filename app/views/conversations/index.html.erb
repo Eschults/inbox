@@ -1,0 +1,21 @@
+<%= content_for :title %>
+  <%= current_user.unread_conversations_count > 0 ? "(#{current_user.unread_conversations_count}) Inbox" : "Inbox" %>
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Inbox</h4>
+        </div>
+        <div class="panel-body">
+          <% @conversations.each do |conversation| %>
+            <div class="conversation-link" id="conversation_<%= conversation.id %>">
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
