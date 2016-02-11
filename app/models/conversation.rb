@@ -22,4 +22,8 @@ class Conversation < ActiveRecord::Base
   def unread_messages?(user)
     unread_messages_count(user) > 0
   end
+
+  def last_message
+    messages.sort_by(&:created_at).last
+  end
 end

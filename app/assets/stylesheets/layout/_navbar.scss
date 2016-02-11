@@ -1,6 +1,6 @@
 /* Main class */
 .navbar-wagon {
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  border-bottom: 1px solid rgb(240, 240, 240);
   background: white;
   transition: all 0.3s ease;
   display: flex;
@@ -8,6 +8,7 @@
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 /* Optional class to fix the navbar on top */
@@ -102,7 +103,7 @@
 /* Navbar dropdown menu */
 .navbar-wagon-dropdown-menu {
   margin-top: 15px;
-  box-shadow: 1px 1px 4px #E6E6E6;
+  box-shadow: none;
   border-color: #E6E6E6;
 }
 .navbar-wagon-dropdown-menu li > a {

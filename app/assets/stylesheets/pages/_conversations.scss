@@ -1,0 +1,66 @@
+.conversation-link {
+  width: 100%;
+  max-height: 75px;
+  padding: 5px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  .conversation-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 1 auto;
+  }
+  .conversation-preview {
+    max-width: 49vh;
+    margin-left: 10px;
+    overflow: hidden;
+    p {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.flexbox-columns {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  .flex-item {
+    flex: 1 1 auto;
+  }
+  ul {
+    margin-bottom: 0;
+  }
+}
+.flexbox-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .flex-item {
+    flex: 1 0 auto;
+  }
+}
+.end-of-messages {
+  font-size: 13px;
+  text-align: center;
+  color: #d9d9d9;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  width: 100%;
+  p {
+    margin-top: 10px;
+  }
+}
+.fixed-height {
+  height: 500px;
+  max-height: 500px;
+}
+#conversation-list {
+  padding-right: 0 !important;
+}
+#message-list {
+  padding-left: 0 !important;
+  .panel {
+    border-left-width: 0 !important;
+  }
+}

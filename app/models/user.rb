@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
   def unread_conversations_count
     unread_conversations.count
   end
+
+  def unread_conversations?
+    unread_conversations_count > 0
+  end
 end

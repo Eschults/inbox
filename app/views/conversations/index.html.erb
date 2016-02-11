@@ -1,19 +1,53 @@
-<%= content_for :title %>
+<%= content_for :title do %>
   <%= current_user.unread_conversations_count > 0 ? "(#{current_user.unread_conversations_count}) Inbox" : "Inbox" %>
 <% end %>
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-4" id="conversation-list">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4>Inbox</h4>
         </div>
-        <div class="panel-body">
-          <% @conversations.each do |conversation| %>
-            <div class="conversation-link" id="conversation_<%= conversation.id %>">
-
+        <div class="panel-body fixed-height">
+          <div class="flexbox-columns">
+            <% @conversations.each do |conversation| %>
+              <div class="conversation-link flexbox-start flex-item" id="conversation_<%= conversation.id %>">
+                <span class="pull-left"><%= image_tag conversation.other_user(current_user).avatar_url, class: "avatar-square" %></span>
+                <div class="conversation-preview flexbox-columns">
+                  <ul class="conversation-header list-unstyled list-inline flex-item">
+                    <li><h5><%= conversation.other_user(current_user).first_name %></h5></li>
+                    <li><%= conversation.last_message.created_at.strftime("%e %b") %></li>
+                  </ul>
+                  <div class="message-preview flex-item">
+                    <%= simple_format conversation.last_message.content %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <div class="end-of-messages">
+              <p>End of messages</p>
             </div>
-          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8" id="message-list">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4><%= @last_conversation.other_user(current_user).first_name %></h4>
+        </div>
+        <div class="panel-body fixed-height">
+          <div class="flexbox-columns">
+            <% @last_conversation.messages.each do |message| %>
+              <div class="message-container flex-item">
+                <span class="pull-left"><%= image_tag message.user.avatar_url, class: "avatar-square-small" %></span>
+                <div class="message-content flexbox-columns">
+                  <h5><%= message.user.first_name %></h5>
+                  <%= simple_format message.content %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

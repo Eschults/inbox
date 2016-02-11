@@ -1,6 +1,7 @@
 class ConversationsController < ApplicationController
   def index
-    @conversations = current_user.conversations
+    @conversations = current_user.conversations.order(updated_at: :desc)
+    @last_conversation = @conversations.first
   end
 
   def create
