@@ -76,12 +76,16 @@
   overflow: scroll;
 }
 #conversation-list {
-  padding-right: 0 !important;
+  @media(min-width: 768px) {
+    padding-right: 0 !important;
+  }
 }
 #message-list {
-  padding-left: 0 !important;
-  .panel {
-    border-left-width: 0 !important;
+  @media(min-width: 768px) {
+    padding-left: 0 !important;
+    .panel {
+      border-left-width: 0 !important;
+    }
   }
 }
 .message-container {
