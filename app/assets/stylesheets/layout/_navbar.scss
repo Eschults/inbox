@@ -1,14 +1,16 @@
 /* Main class */
 .navbar-wagon {
   border-bottom: 1px solid rgb(240, 240, 240);
-  background: white;
+  background: #fcfcfc;
   transition: all 0.3s ease;
-  display: flex;
-  height: 70px;
-  padding: 0px 30px;
-  align-items: center;
-  justify-content: space-between;
   margin-bottom: 15px;
+  .container {
+    display: flex;
+    height: 70px;
+    // padding: 0px 30px;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 /* Optional class to fix the navbar on top */
@@ -25,11 +27,16 @@
   width: 50px;
 }
 
+.navbar-wagon-brand {
+  flex: 1 0 auto;
+}
+
 /* Navbar right section (with form, links, button) */
 .navbar-wagon-right {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex: 1 0 auto;
 }
 
 /* Navbar item */

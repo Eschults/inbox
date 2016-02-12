@@ -6,10 +6,23 @@
   margin: 0;
   text-align: center;
   color: white;
+  border-radius: 0;
+  .close {
+    opacity: 1;
+    font-weight: normal;
+    text-shadow: none;
+    font-size: 15px;
+    top: 2px;
+  }
 }
 .alert-info {
   background: $green;
+  border: none;
 }
 .alert-warning {
   background: $red;
+  border: none;
+}
+.alert-dismissible .close {
+  top: 0;
 }
