@@ -15,7 +15,6 @@
     <div class="navbar-wagon-right hidden-xs hidden-sm">
       <!-- Different navigation if login or not -->
       <% if user_signed_in? %>
-        <!-- Notification -->
         <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link" do %>
         <% end %>
         <!-- Profile picture and dropdown -->
@@ -33,6 +32,8 @@
         </div>
       <% else %>
         <!-- Login text link -->
+        <%= link_to "#", class: "navbar-wagon-item navbar-wagon-link" do %>
+        <% end %>
         <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
       <!-- Button (call-to-action) -->
