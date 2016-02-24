@@ -27,6 +27,17 @@
       text-overflow: ellipsis;
     }
   }
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(251, 251, 251);
+    i {
+      color: white;
+    }
+  }
+}
+.selected,
+.selected:hover {
+  background-color: #3A5795;
 }
 .panel-body {
   position: relative;
