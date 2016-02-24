@@ -1,61 +1,6 @@
 <%= content_for :title do %>
   <%= current_user.unread_conversations_count > 0 ? "(#{current_user.unread_conversations_count}) Inbox" : "Inbox" %>
 <% end %>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4" id="conversation-list">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4>Inbox</h4>
-        </div>
-        <div class="panel-body fixed-height">
-          <div class="flexbox-columns">
-            <% @conversations.each do |conversation| %>
-              <div class="conversation-link flexbox-start flex-item" id="conversation_<%= conversation.id %>">
-                <span class="flex-item-shrink"><%= image_tag conversation.other_user(current_user).avatar_url, class: "avatar-square" %></span>
-                <div class="conversation-preview flexbox-columns flex-item">
-                  <ul class="conversation-header list-unstyled list-inline flex-item">
-                    <li><h6><%= conversation.other_user(current_user).first_name %></h6></li>
-                    <li class="date"><%= conversation.last_message.created_at.strftime("%e %b") %></li>
-                  </ul>
-                  <div class="message-preview flex-item">
-                    <span><%= conversation.last_message.content %></span>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-            <div class="end-of-messages">
-              <p>End of messages</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-8" id="message-list">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4><%= @last_conversation.other_user(current_user).first_name %></h4>
-        </div>
-        <div class="panel-body fixed-height">
-          <div class="flexbox-columns">
-            <% @last_conversation.messages.each do |message| %>
-              <div class="message-container flexbox-start flex-item">
-                <span class="flex-item-shrink"><%= image_tag message.user.avatar_url, class: "avatar-square-small" %></span>
-                <div class="message-content flex-item flexbox-columns">
-                  <ul class="message-header list-unstyled list-inline flex-item">
-                    <li><h6><%= message.user.first_name %></h6></li>
-                    <li class="date"><%= message.created_at.strftime("%b %e, %l:%M%P") %></li>
-                  </ul>
-                  <%= simple_format message.content %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-          <div class="message-input">
-            <textarea name="" id="newMessageTextarea" placeholder="Answer here..."></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+<%= react_component "Inbox",
+    render(template: 'conversations/index.json.jbuilder') %>

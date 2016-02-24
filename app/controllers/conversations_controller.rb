@@ -1,7 +1,11 @@
 class ConversationsController < ApplicationController
   def index
     @conversations = current_user.conversations.order(updated_at: :desc)
-    @last_conversation = @conversations.first
+    if params[:conversation_id]
+      @selected_conversation = @conversations.find(params[:conversation_id])
+    else
+      @selected_conversation = @conversations.first
+    end
   end
 
   def create
