@@ -18,7 +18,7 @@ var Inbox = React.createClass({
                 <h4>Inbox</h4>
               </div>
               <div className="panel-body fixed-height">
-                <ConversationList conversations={this.state.conversations} />
+                <ConversationList conversations={this.state.conversations} selectedConversationId={this.state.selectedConversationId}/>
               </div>
             </div>
           </div>

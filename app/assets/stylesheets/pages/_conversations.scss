@@ -38,6 +38,10 @@
 .selected,
 .selected:hover {
   background-color: #3A5795;
+  color: white;
+  h6 {
+    color: white;
+  }
 }
 .panel-body {
   position: relative;

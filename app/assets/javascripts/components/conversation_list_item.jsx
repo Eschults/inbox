@@ -1,7 +1,19 @@
 var ConversationListItem = React.createClass({
+  getInitialState: function() {
+    return {
+      selected: this.props.conversation.id == this.props.selectedConversationId
+    }
+  },
+
   render: function() {
+    var divClasses = classNames({
+      "conversation-link": true,
+      "flexbox-start": true,
+      "flex-item": true,
+      "selected": this.state.selected
+    })
     return (
-      <div className="conversation-link flexbox-start flex-item" id={"conversation_" + this.props.conversation.id}>
+      <div className={divClasses} id={"conversation_" + this.props.conversation.id}>
         <span className="flex-item-shrink">
           <img src={this.props.conversation.other_user_piture_url} className="avatar-square" />
         </span>
