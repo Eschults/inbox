@@ -4,7 +4,12 @@ var ConversationList = React.createClass({
     return (
       <div className="flexbox-columns">
         {this.props.conversations.map(function(conversation, index){
-          return <ConversationListItem conversation={conversation} key={index} selectedConversationId={that.props.selectedConversationId} />;
+          return <ConversationListItem
+                    conversation={conversation}
+                    key={index}
+                    selectedConversationId={that.props.selectedConversationId}
+                    onConversationSelection={that.props.onConversationSelection}
+                     />;
         })}
         <div className="end-of-messages">
           <p>End of messages</p>

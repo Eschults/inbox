@@ -6,6 +6,11 @@ class ConversationsController < ApplicationController
     else
       @selected_conversation = @conversations.first
     end
+    @unread_messages = @selected_conversation.messages.where(read_at: nil)
+    @unread_messages.each do |message|
+      message.read_at = Time.now
+      message.save
+    end
   end
 
   def create

@@ -18,7 +18,11 @@ var Inbox = React.createClass({
                 <h4>Inbox</h4>
               </div>
               <div className="panel-body fixed-height">
-                <ConversationList conversations={this.state.conversations} selectedConversationId={this.state.selectedConversationId}/>
+                <ConversationList
+                  conversations={this.state.conversations}
+                  selectedConversationId={this.state.selectedConversationId}
+                  onConversationSelection={this.handleConversationSelection}
+                  />
               </div>
             </div>
           </div>
@@ -36,5 +40,21 @@ var Inbox = React.createClass({
         </div>
       </div>
     )
+  },
+
+  handleConversationSelection: function(id) {
+    var that = this
+    $.ajax({
+      type: 'GET',
+      url: Routes.root_path({format: 'json', conversation_id: id}),
+      success: function(data) {
+        that.setState({
+          conversations: data.conversations,
+          selectedConversationId: data.conversation_id,
+          firstName: data.first_name,
+          messages: data.messages
+        })
+      }
+    })
   }
 })
