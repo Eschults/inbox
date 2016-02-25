@@ -75,6 +75,15 @@
     flex: 1 0;
   }
 }
+.flexbox-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  .flex-item {
+    flex: 0 1;
+    margin: 5px 0 0 10px;
+  }
+}
 .end-of-messages {
   font-size: 13px;
   text-align: center;
@@ -123,11 +132,12 @@
 }
 .message-input {
   position: absolute;
+  background-color: white;
   bottom: 0;
   right: 0;
   left: 0;
   width: 100%;
-  padding: 10px 20px;
+  padding: 10px 15px;
   box-shadow: 0 -1px 5px 0 rgba(0,0,0,0.07),0 -1px 0 0 rgba(0,0,0,0.03);
   textarea {
     width: 100%;
@@ -140,9 +150,37 @@
     &:focus {
       outline: none;
     }
+    &.focused {
+      height: 200px;
+      border-color: #5898f1;
+    }
+  }
+  .btn-send,
+  .btn-stop {
+    font-size: 13px;
+    border-radius: 1px;
+    color: white;
+  }
+  .btn-send {
+    background-color: #3A5795;
+    &:hover {
+      background-color: #1B316C;
+    }
+  }
+  .btn-stop {
+    background: rgba(0,0,0,0.12);
+    color: rgba(0,0,0,0.35) !important;
+    &:hover {
+      background: rgba(0,0,0,0.15);
+      color: rgba(0,0,0,0.40) !important;
+    }
+
   }
 }
 .date {
   font-size: 13px;
   color: #bdc1c9;
+}
+.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
+  outline: none;
 }
