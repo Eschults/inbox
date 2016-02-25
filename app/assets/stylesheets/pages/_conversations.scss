@@ -49,7 +49,11 @@
 .panel-body > .flexbox-columns {
   width: 100%;
 }
-.flexbox-columns {
+.scroll {
+  overflow: scroll;
+}
+.flexbox-columns-start {
+  height: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -62,11 +66,26 @@
   }
   .flex-item-shrink {
     flex: 0 1 auto;
+    min-height: 61px;
   }
   ul {
     margin-bottom: 0;
   }
 }
+
+.flexbox-columns-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+  .flex-item {
+    flex: 0 0 auto;
+  }
+  ul {
+    margin-bottom: 0;
+  }
+}
+
 .flexbox-start {
   display: flex;
   align-items: flex-start;
@@ -96,8 +115,9 @@
 }
 .fixed-height {
   height: 75vh;
-  max-height: 75vh;
   overflow: scroll;
+}
+.scroll {
 }
 #conversation-list {
   @media(min-width: 768px) {
@@ -130,15 +150,16 @@
     flex: 1 1 auto;
   }
 }
+.messages {
+  width: 100%
+}
 .message-input {
-  position: absolute;
   background-color: white;
-  bottom: 0;
-  right: 0;
-  left: 0;
   width: 100%;
   padding: 10px 15px;
   box-shadow: 0 -1px 5px 0 rgba(0,0,0,0.07),0 -1px 0 0 rgba(0,0,0,0.03);
+  position: absolute;
+  bottom: 0;
   textarea {
     width: 100%;
     border: 1px solid rgb(204, 204, 204);
@@ -183,4 +204,10 @@
 }
 .btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
   outline: none;
+}
+.wrapper {
+  min-height: 75vh;
+  height: 100%;
+  overflow: scroll;
+  padding-bottom: 68px;
 }

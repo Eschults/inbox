@@ -9,6 +9,10 @@ var Inbox = React.createClass({
   },
 
   render: function() {
+    var messageListClasses = classNames({
+      "scroll-messages": true,
+      "scroll-messages-focused": this.state.focused
+    })
     return (
       <div className="container">
         <div className="row">
@@ -32,8 +36,10 @@ var Inbox = React.createClass({
                 <h4>{this.state.firstName}</h4>
               </div>
               <div className="panel-body fixed-height">
-                <MessageList messages={this.state.messages}/>
-                <CreateMessage conversationId={this.state.selectedConversationId} onMessageCreation={this.handleMessageCreation}/>
+                <div className="wrapper">
+                  <MessageList messages={this.state.messages}/>
+                  <CreateMessage conversationId={this.state.selectedConversationId} onMessageCreation={this.handleMessageCreation}/>
+                </div>
               </div>
             </div>
           </div>
@@ -72,5 +78,9 @@ var Inbox = React.createClass({
         })
       }
     })
+  },
+
+  componentDidMount: function() {
+    $('.wrapper').scrollTop($('.wrapper')[0].scrollHeight)
   }
 })

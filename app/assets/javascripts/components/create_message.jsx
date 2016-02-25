@@ -27,7 +27,7 @@ var CreateMessage = React.createClass({
       "hidden": !this.state.focused
     })
     return (
-      <div className="message-input">
+      <div className="message-input" id="newMessage">
         <textarea className={fakeTextareaClasses} placeholder="Click me..." onClick={this.handleClick} onKeyUp={this.handleKeyUp} ></textarea>
         <textarea className={textareaClasses} id="newTextarea" placeholder="Answer here..." onKeyUp={this.handleKeyUp} ></textarea>
         <div className="actions flexbox-end">
@@ -42,6 +42,8 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: true
     })
+    $('.wrapper').css('padding-bottom', 268)
+    $('.wrapper').scrollTop($('.wrapper')[0].scrollHeight)
     setTimeout(function() {
       $('#newTextarea').focus();
     }, 100)
@@ -54,6 +56,7 @@ var CreateMessage = React.createClass({
         focused: false,
         value: ''
       })
+      $('.wrapper').css('padding-bottom', 61)
     } else {
       this.setState({
         value: $('#newTextarea').val()
@@ -65,6 +68,7 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: false
     })
+    $('.wrapper').css('padding-bottom', 61)
   },
 
   createMessage: function() {
