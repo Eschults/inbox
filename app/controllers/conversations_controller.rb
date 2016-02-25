@@ -11,6 +11,7 @@ class ConversationsController < ApplicationController
       message.read_at = Time.now
       message.save
     end
+    @unread_conversations_count = current_user.unread_conversations_count
   end
 
   def create

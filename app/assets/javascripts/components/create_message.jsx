@@ -42,7 +42,7 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: true
     })
-    $('.wrapper').css('padding-bottom', 268)
+    $('.wrapper').css('padding-bottom', 261)
     $('.wrapper').scrollTop($('.wrapper')[0].scrollHeight)
     setTimeout(function() {
       $('#newTextarea').focus();

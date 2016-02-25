@@ -62,7 +62,7 @@ var Inbox = React.createClass({
         })
         setTimeout(function() {
           $('.wrapper').animate({
-            scrollTop: $("#newMessage").offset().top
+            scrollTop: $('.messages').height()
           }, "slow");
         }, 50)
       }

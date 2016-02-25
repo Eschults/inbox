@@ -4,7 +4,15 @@ var ConversationListItem = React.createClass({
       "conversation-link": true,
       "flexbox-start": true,
       "flex-item": true,
-      "selected": this.props.conversation.id == this.props.selectedConversationId
+      "selected": this.props.conversation.id == this.props.selectedConversationId,
+      "unread-messages": !this.props.conversation.is_last_message_writer_current_user && !this.props.conversation.last_message_read_at
+    })
+    var iClasses = classNames({
+      "small-badge": !this.props.conversation.is_last_message_writer_current_user,
+      "small-badge-off": !this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at,
+      "fa": this.props.conversation.is_last_message_writer_current_user,
+      "fa-reply": this.props.conversation.is_last_message_writer_current_user && !this.props.conversation.last_message_read_at,
+      "fa-check": this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at,
     })
     return (
       <div className={divClasses} id={"conversation_" + this.props.conversation.id} onClick={this.handleClick}>
@@ -17,6 +25,7 @@ var ConversationListItem = React.createClass({
             <li className="date">{this.props.conversation.last_message_created_at}</li>
           </ul>
           <div className="message-preview flex-item">
+            <i className={iClasses}> </i>&nbsp;&nbsp;
             <span>{this.props.conversation.last_message_content}</span>
           </div>
         </div>
