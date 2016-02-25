@@ -43,15 +43,20 @@ var CreateMessage = React.createClass({
       focused: true
     })
     setTimeout(function() {
-      document.getElementById('newTextarea').focus();
+      $('#newTextarea').focus();
     }, 100)
   },
 
   handleKeyUp: function(e) {
     if(e.which == 27) {
+      $('#newTextarea').val('')
       this.setState({
         focused: false,
         value: ''
+      })
+    } else {
+      this.setState({
+        value: $('#newTextarea').val()
       })
     }
   },
@@ -60,5 +65,17 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: false
     })
+  },
+
+  createMessage: function() {
+    this.props.onMessageCreation(this.props.conversationId, this.state.value)
+    var that = this
+    setTimeout(function() {
+      $('#newTextarea').val('')
+      that.setState({
+        focused: false,
+        value: ''
+      })
+    }, 100)
   }
 })

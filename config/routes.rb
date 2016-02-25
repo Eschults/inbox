@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'conversations#index'
+  post 'conversations/:conversation_id/messages' => 'messages#create', as: :conversation_message
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

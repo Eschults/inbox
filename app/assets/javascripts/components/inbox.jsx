@@ -33,7 +33,7 @@ var Inbox = React.createClass({
               </div>
               <div className="panel-body fixed-height">
                 <MessageList messages={this.state.messages}/>
-                <CreateMessage conversationId={this.state.selectedConversationId}/>
+                <CreateMessage conversationId={this.state.selectedConversationId} onMessageCreation={this.handleMessageCreation}/>
               </div>
             </div>
           </div>
@@ -47,6 +47,22 @@ var Inbox = React.createClass({
     $.ajax({
       type: 'GET',
       url: Routes.root_path({format: 'json', conversation_id: id}),
+      success: function(data) {
+        that.setState({
+          conversations: data.conversations,
+          selectedConversationId: data.conversation_id,
+          firstName: data.first_name,
+          messages: data.messages
+        })
+      }
+    })
+  },
+
+  handleMessageCreation: function(conversationId, content) {
+    var that = this
+    $.ajax({
+      type: 'POST',
+      url: Routes.conversation_message_path({format: 'json', conversation_id: conversationId, message: {content: content}}),
       success: function(data) {
         that.setState({
           conversations: data.conversations,
