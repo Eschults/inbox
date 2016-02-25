@@ -38,7 +38,7 @@ var Inbox = React.createClass({
               <div className="panel-body fixed-height">
                 <div className="wrapper">
                   <MessageList messages={this.state.messages}/>
-                  <CreateMessage conversationId={this.state.selectedConversationId} onMessageCreation={this.handleMessageCreation}/>
+                  <CreateMessage conversationId={this.state.selectedConversationId} ref='textarea' onMessageCreation={this.handleMessageCreation}/>
                 </div>
               </div>
             </div>
@@ -60,6 +60,10 @@ var Inbox = React.createClass({
           firstName: data.first_name,
           messages: data.messages
         })
+        that.refs.textarea.setState({
+          focused: false
+        })
+        $('.wrapper').css('padding-bottom', 61)
         setTimeout(function() {
           $('.wrapper').animate({
             scrollTop: $('.messages').height()
