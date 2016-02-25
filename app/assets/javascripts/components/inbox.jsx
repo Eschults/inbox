@@ -60,6 +60,11 @@ var Inbox = React.createClass({
           firstName: data.first_name,
           messages: data.messages
         })
+        setTimeout(function() {
+          $('.wrapper').animate({
+            scrollTop: $("#newMessage").offset().top
+          }, "slow");
+        }, 50)
       }
     })
   },
@@ -76,6 +81,7 @@ var Inbox = React.createClass({
           firstName: data.first_name,
           messages: data.messages
         })
+        $('.wrapper').css('padding-bottom', 61)
       }
     })
   },
