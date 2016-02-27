@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   def index
-    @conversations = current_user.conversations.includes(:messages).order("messages.created_at DESC")
+    @conversations = current_user.conversations.order("messages.created_at DESC")
     if params[:conversation_id]
       @selected_conversation = @conversations.find(params[:conversation_id])
     else
