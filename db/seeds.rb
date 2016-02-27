@@ -1,7 +1,7 @@
-edward = User.create(email: "edward@lewagon.com", password: "azertyuiop", avatar_url: "http://graph.facebook.com/10152948868146275/picture")
-boris = User.create(email: "boris@lewagon.com", password: "azertyuiop", avatar_url: "https://avatars.githubusercontent.com/u/2471555?v=3")
-seb = User.create(email: "seb@lewagon.com", password: "azertyuiop", avatar_url: "https://avatars.githubusercontent.com/u/414418?v=3")
-romain = User.create(email: "romain@lewagon.com", password: "azertyuiop", avatar_url: "https://avatars.githubusercontent.com/u/6377103?v=3")
+edward = User.create(email: "edward@lewagon.com", password: "azertyuiop", first_name: "Edward", avatar_url: "http://graph.facebook.com/10152948868146275/picture")
+boris = User.create(email: "boris@lewagon.com", password: "azertyuiop", first_name: "Boris", avatar_url: "https://avatars.githubusercontent.com/u/2471555?v=3")
+seb = User.create(email: "seb@lewagon.com", password: "azertyuiop", first_name: "Seb", avatar_url: "https://avatars.githubusercontent.com/u/414418?v=3")
+romain = User.create(email: "romain@lewagon.com", password: "azertyuiop", first_name: "Romain", avatar_url: "https://avatars.githubusercontent.com/u/6377103?v=3")
 
 c1 = Conversation.create(user1: edward, user2: boris)
 c2 = Conversation.create(user1: edward, user2: seb)

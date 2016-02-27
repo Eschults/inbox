@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
   def unread_conversations?
     unread_conversations_count > 0
   end
+
+  def one_avatar_url
+    avatar_url ? avatar_url : "http://placehold.it/64x64"
+  end
 end
