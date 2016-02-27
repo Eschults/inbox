@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   has_many :messages
 
   def conversations
-    Conversation.includes(:messages).where("user1_id = :id OR user2_id = :id", id: id).order("messages.created_at DESC")
+    Conversation.includes(:messages)
+                .where("user1_id = :id OR user2_id = :id", id: id)
+                .order("messages.created_at DESC")
   end
 
   def other_user(conversation)
