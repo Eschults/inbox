@@ -11,11 +11,6 @@ class Message < ActiveRecord::Base
     self.save
   end
 
-  def mark_as_unread
-    self.read_at = nil
-    self.save
-  end
-
   def users
     conversation.users
   end

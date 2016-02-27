@@ -8,8 +8,7 @@ class ConversationsController < ApplicationController
     end
     @unread_messages = @selected_conversation.messages.where(read_at: nil, user: @selected_conversation.other_user(current_user))
     @unread_messages.each do |message|
-      message.read_at = Time.now
-      message.save
+      message.mark_as_read
     end
     @unread_conversations_count = current_user.unread_conversations_count
   end
