@@ -6,7 +6,10 @@ class ConversationsController < ApplicationController
     else
       @selected_conversation = @conversations.first
     end
-    @unread_messages = @selected_conversation.messages.where(read_at: nil, user: @selected_conversation.other_user(current_user))
+    @unread_messages = @selected_conversation.messages.where(
+      read_at: nil,
+      user: @selected_conversation.other_user(current_user)
+    )
     @unread_messages.each do |message|
       message.mark_as_read
     end
