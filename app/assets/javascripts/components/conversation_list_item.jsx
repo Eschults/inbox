@@ -12,7 +12,7 @@ var ConversationListItem = React.createClass({
       "small-badge-off": !this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at,
       "fa": this.props.conversation.is_last_message_writer_current_user,
       "fa-reply": this.props.conversation.is_last_message_writer_current_user && !this.props.conversation.last_message_read_at,
-      "fa-check": this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at,
+      "fa-check": this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at
     })
     return (
       <div className={divClasses} id={"conversation_" + this.props.conversation.id} onClick={this.handleClick}>
