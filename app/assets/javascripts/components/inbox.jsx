@@ -9,10 +9,6 @@ var Inbox = React.createClass({
   },
 
   render: function() {
-    var messageListClasses = classNames({
-      "scroll-messages": true,
-      "scroll-messages-focused": this.state.focused
-    })
     return (
       <div className="container">
         <div className="row">
