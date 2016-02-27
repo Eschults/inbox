@@ -6,7 +6,7 @@
       <div class="badge-container">
         <i class="fa fa-envelope-o"></i>
         <% if user_signed_in? && current_user.unread_conversations? %>
-          <div class="badge badge-blue">3</div>
+          <div class="badge badge-blue"><%= @unread_conversations_count %></div>
         <% end %>
       </div>
     <% end %>

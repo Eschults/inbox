@@ -34,12 +34,12 @@
     <div class="col-sm-8" id="message-list">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4><%= @last_conversation.other_user(current_user).first_name %></h4>
+          <h4><%= @selected_conversation.other_user(current_user).first_name %></h4>
         </div>
         <div class="panel-body fixed-height">
           <div class="wrapper">
             <div class="messages flexbox-columns-end flex-item">
-              <% @last_conversation.messages.each do |message| %>
+              <% @selected_conversation.messages.each do |message| %>
                 <div class="message-container flexbox-start flex-item">
                   <span class="flex-item-shrink"><%= image_tag message.user.avatar_url, class: "avatar-square-small" %></span>
                   <div class="message-content flex-item flexbox-columns">

@@ -1,14 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-edward = User.create(email: "edward@lewagon.com", password: "azertyuiop")
-boris = User.create(email: "boris@lewagon.com", password: "azertyuiop")
-seb = User.create(email: "seb@lewagon.com", password: "azertyuiop")
-romain = User.create(email: "romain@lewagon.com", password: "azertyuiop")
+edward = User.create(email: "edward@lewagon.com", password: "azertyuiop", avatar_url: "http://graph.facebook.com/10152948868146275/picture")
+boris = User.create(email: "boris@lewagon.com", password: "azertyuiop", avatar_url: "https://avatars.githubusercontent.com/u/2471555?v=3")
+seb = User.create(email: "seb@lewagon.com", password: "azertyuiop", avatar_url: "https://avatars.githubusercontent.com/u/414418?v=3")
+romain = User.create(email: "romain@lewagon.com", password: "azertyuiop", avatar_url: "https://avatars.githubusercontent.com/u/6377103?v=3")
 
 c1 = Conversation.create(user1: edward, user2: boris)
 c2 = Conversation.create(user1: edward, user2: seb)
