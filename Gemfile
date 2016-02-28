@@ -6,6 +6,12 @@ gem 'pg'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
+gem 'js-routes'
+gem 'react-rails', '1.2.0'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-classnames'
+end
 
 gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
