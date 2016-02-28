@@ -16,7 +16,7 @@
                 <div class="conversation-preview flexbox-columns flex-item">
                   <ul class="conversation-header list-unstyled list-inline flex-item">
                     <li><h6><%= conversation.other_user(current_user).first_name %></h6></li>
-                    <li class="date"><%= conversation.last_message.created_at.strftime("%e %b") %></li>
+                    <li class="date"><%= conversation.last_message.created_at.strftime("%b %e") %></li>
                   </ul>
                   <div class="message-preview flex-item">
                     <span><%= conversation.last_message.content %></span>
