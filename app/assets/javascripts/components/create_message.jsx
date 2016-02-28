@@ -41,6 +41,7 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: true
     })
+    this.props.setPadding()
     setTimeout(function() {
       $('#newTextarea').focus()
     }, 100)
@@ -69,5 +70,7 @@ var CreateMessage = React.createClass({
       focused: false,
       value: ''
     })
+    this.props.cancelPadding()
+    $('#newTextarea').val('')
   }
 })

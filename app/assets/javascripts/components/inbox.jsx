@@ -4,11 +4,15 @@ var Inbox = React.createClass({
       conversations: this.props.conversations,
       messages: this.props.messages,
       selectedConversationId: this.props.selected_conversation_id,
-      firstName: this.props.first_name
+      firstName: this.props.first_name,
+      focused: false
     }
   },
 
   render: function() {
+    var wrapperClasses = classNames({
+      "focused": this.state.focused
+    })
     return (
       <div className="container">
         <div className="row">
@@ -32,7 +36,7 @@ var Inbox = React.createClass({
                 <h4>{this.state.firstName}</h4>
               </div>
               <div className="panel-body fixed-height">
-                <div className="wrapper">
+                <div className={wrapperClasses} id="wrapper">
                   <MessageList
                     messages={this.state.messages}
                   />
@@ -40,6 +44,8 @@ var Inbox = React.createClass({
                     ref="createMessage"
                     conversationId={this.state.selectedConversationId}
                     onMessageCreation={this.handleMessageCreation}
+                    setPadding={this.setFocusedState}
+                    cancelPadding={this.cancelFocusedState}
                   />
                 </div>
               </div>
@@ -85,6 +91,18 @@ var Inbox = React.createClass({
         })
         that.refs.createMessage.resetState()
       }
+    })
+  },
+
+  setFocusedState: function() {
+    this.setState({
+      focused: true
+    })
+  },
+
+  cancelFocusedState: function() {
+    this.setState({
+      focused: false
     })
   }
 })
