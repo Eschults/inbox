@@ -24,6 +24,6 @@ class Conversation < ActiveRecord::Base
   end
 
   def last_message
-    messages.order(created_at: :desc).last
+    messages.order(created_at: :asc).last
   end
 end
