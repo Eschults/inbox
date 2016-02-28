@@ -14,9 +14,9 @@ var ConversationListItem = React.createClass({
       "small-badge-off": !this.props.conversation.is_last_message_writer_current_user && this.props.conversation.last_message_read_at
     })
     return (
-      <div className={divClasses}>
+      <div className={divClasses} onClick={this.handleClick}>
         <span className="flex-item-shrink">
-          <img src={this.props.conversation.other_user_piture_url} className="avatar-square" />
+          <img src={this.props.conversation.other_user_picture_url} className="avatar-square" />
         </span>
         <div className="conversation-preview flexbox-columns flex-item">
           <ul className="conversation-header list-unstyled list-inline flex-item">
@@ -30,5 +30,10 @@ var ConversationListItem = React.createClass({
         </div>
       </div>
     )
+  },
+
+  handleClick: function() {
+    // appeler une methode qui va changer le state du composant Inbox
+    this.props.onConversationSelection(this.props.conversation.id)
   }
 })
