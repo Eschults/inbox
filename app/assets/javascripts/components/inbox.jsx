@@ -37,7 +37,9 @@ var Inbox = React.createClass({
                     messages={this.state.messages}
                   />
                   <CreateMessage
-                    // TODO props
+                    ref="createMessage"
+                    conversationId={this.state.selectedConversationId}
+                    onMessageCreation={this.handleMessageCreation}
                   />
                 </div>
               </div>
@@ -47,6 +49,7 @@ var Inbox = React.createClass({
       </div>
     )
   },
+
   handleConversationSelection: function(conversationId) {
     var that = this
     $.ajax({
@@ -59,6 +62,28 @@ var Inbox = React.createClass({
           conversations: data.conversations,
           messages: data.messages
         })
+        that.refs.createMessage.resetState()
+      }
+    })
+  },
+
+  handleMessageCreation: function(conversationId, content) {
+    var that = this
+    $.ajax({
+      type: 'POST',
+      data: { message: { content: content} },
+      url: Routes.conversation_messages_path({
+        format: 'json',
+        conversation_id: conversationId
+      }),
+      success: function(data) {
+        that.setState({
+          selectedConversationId: data.selected_conversation_id,
+          firstName: data.first_name,
+          conversations: data.conversations,
+          messages: data.messages
+        })
+        that.refs.createMessage.resetState()
       }
     })
   }
