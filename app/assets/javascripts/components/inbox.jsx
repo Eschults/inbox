@@ -9,19 +9,26 @@ var Inbox = React.createClass({
                 <h4>Inbox</h4>
               </div>
               <div className="panel-body fixed-height">
-                <ConversationList // TODO props />
+                <ConversationList
+                  conversations={this.props.conversations}
+                  selectedConversationId={this.props.selected_conversation_id}
+                />
               </div>
             </div>
           </div>
           <div className="col-sm-8" id="message-list">
             <div className="panel panel-default">
               <div className="panel-heading">
-                <h4>TODO</h4>
+                <h4>{this.props.first_name}</h4>
               </div>
               <div className="panel-body fixed-height">
                 <div className="wrapper">
-                  <MessageList // TODO props/>
-                  <CreateMessage  // TODO props />
+                  <MessageList
+                    messages={this.props.messages}
+                  />
+                  <CreateMessage
+                    // TODO props
+                  />
                 </div>
               </div>
             </div>
