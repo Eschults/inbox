@@ -1,5 +1,5 @@
 <%= content_for :title do %>
-  <%= current_user.unread_conversations_count > 0 ? "(#{current_user.unread_conversations_count}) Inbox" : "Inbox" %>
+  <%= current_user.unread_conversations_count > 0 ? "(#{@unread_conversations_count}) Inbox" : "Inbox" %>
 <% end %>
 <div class="container">
   <div class="row">
@@ -37,9 +37,9 @@
           <h4><%= @selected_conversation.other_user(current_user).first_name %></h4>
         </div>
         <div class="panel-body fixed-height">
-          <div class="wrapper">
+          <div id="wrapper">
             <div class="messages flexbox-columns-end flex-item">
-              <% @selected_conversation.messages.each do |message| %>
+              <% @selected_conversation.messages.order(created_at: :asc).each do |message| %>
                 <div class="message-container flexbox-start flex-item">
                   <span class="flex-item-shrink"><%= image_tag message.user.one_avatar_url, class: "avatar-square-small" %></span>
                   <div class="message-content flex-item flexbox-columns">

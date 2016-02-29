@@ -215,9 +215,12 @@
 .btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
   outline: none;
 }
-.wrapper {
+#wrapper {
   min-height: 75vh;
   height: 100%;
   overflow: scroll;
-  padding-bottom: 68px;
+  padding-bottom: 61px;
+  &.focused {
+    padding-bottom: 159px;
+  }
 }
