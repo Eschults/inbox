@@ -11,7 +11,7 @@
         <div class="panel-body fixed-height">
           <div class="flexbox-columns-start">
             <% @conversations.each do |conversation| %>
-              <div class="conversation-link flexbox-start flex-item" id="conversation_<%= conversation.id %>">
+              <div class="conversation-link flexbox-start">
                 <span class="flex-item-shrink"><%= image_tag conversation.other_user(current_user).one_avatar_url, class: "avatar-square" %></span>
                 <div class="conversation-preview flexbox-columns flex-item">
                   <ul class="conversation-header list-unstyled list-inline flex-item">
@@ -53,8 +53,12 @@
               <% end %>
             </div>
           </div>
-          <div class="message-input">
-            <textarea name="" id="newMessageTextarea" placeholder="Answer here..."></textarea>
+          <div class="message-input" id="newMessage">
+            <textarea id="newTextarea" placeholder="Answer here..."></textarea>
+            <div class="actions flexbox hidden">
+              <button class="btn btn-stop hidden">Cancel</button>
+              <button class="btn btn-send hidden">Send</button>
+            </div>
           </div>
         </div>
       </div>
