@@ -3,7 +3,7 @@ JsRoutes.setup do |config|
   #     $ rake tmp:cache:clear
   #     before restarting your `rails s`
   config.include = [
-    /^root$/,
+    /^conversations$/,
     /^conversation_messages$/
   ]
 end

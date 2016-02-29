@@ -44,8 +44,8 @@ var Inbox = React.createClass({
                     ref="createMessage"
                     conversationId={this.state.selectedConversationId}
                     onMessageCreation={this.handleMessageCreation}
-                    setPadding={this.setFocusedState}
-                    cancelPadding={this.cancelFocusedState}
+                    openTextarea={this.openTextarea}
+                    closeTextarea={this.closeTextarea}
                   />
                 </div>
               </div>
@@ -60,7 +60,7 @@ var Inbox = React.createClass({
     var that = this;
     $.ajax({
       type: 'GET',
-      url: Routes.root_path({format: 'json', conversation_id: conversationId}),
+      url: Routes.conversations_path({format: 'json', conversation_id: conversationId}),
       success: function(data) {
         that.setState({
           selectedConversationId: data.selected_conversation_id,
@@ -94,13 +94,13 @@ var Inbox = React.createClass({
     })
   },
 
-  setFocusedState: function() {
+  openTextarea: function() {
     this.setState({
       focused: true
     })
   },
 
-  cancelFocusedState: function() {
+  closeTextarea: function() {
     this.setState({
       focused: false
     })

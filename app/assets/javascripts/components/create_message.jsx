@@ -38,7 +38,7 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: true
     })
-    this.props.setPadding()
+    this.props.openTextarea()
   },
 
   handleKeyUp: function(e) {
@@ -61,7 +61,7 @@ var CreateMessage = React.createClass({
     });
     this._textarea().blur();
     this._textarea().value = '';
-    this.props.cancelPadding();
+    this.props.closeTextarea();
   },
 
   _textarea: function() {
