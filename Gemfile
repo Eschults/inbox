@@ -7,7 +7,7 @@ gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'js-routes'
-gem 'react-rails', '1.2.0'
+gem 'react-rails', '1.6.1'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-classnames'

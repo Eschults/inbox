@@ -148,7 +148,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.5.0)
-    react-rails (1.2.0)
+    react-rails (1.6.1)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
       connection_pool
@@ -209,7 +209,7 @@ DEPENDENCIES
   rails (= 4.2.5.1)
   rails-assets-classnames!
   rails_12factor
-  react-rails (= 1.2.0)
+  react-rails (= 1.6.1)
   sass-rails (~> 5.0)
   simple_form
   spring

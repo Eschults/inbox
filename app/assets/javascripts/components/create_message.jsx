@@ -65,6 +65,6 @@ var CreateMessage = React.createClass({
   },
 
   _textarea: function() {
-    return this.refs.textarea.getDOMNode();
+    return this.refs.textarea;
   }
 })
