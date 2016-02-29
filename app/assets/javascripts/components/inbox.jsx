@@ -57,7 +57,7 @@ var Inbox = React.createClass({
   },
 
   handleConversationSelection: function(conversationId) {
-    var that = this
+    var that = this;
     $.ajax({
       type: 'GET',
       url: Routes.root_path({format: 'json', conversation_id: conversationId}),
@@ -74,7 +74,7 @@ var Inbox = React.createClass({
   },
 
   handleMessageCreation: function(conversationId, content) {
-    var that = this
+    var that = this;
     $.ajax({
       type: 'POST',
       data: { message: { content: content} },
