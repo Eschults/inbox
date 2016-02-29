@@ -2,7 +2,7 @@
 <div class="navbar-wagon">
   <div class="container">
     <!-- Logo -->
-    <%= link_to root_path, class: "navbar-wagon-brand" do %>
+    <%= link_to conversations_path, class: "navbar-wagon-brand" do %>
       <div class="badge-container">
         <i class="fa fa-envelope-o"></i>
         <% if user_signed_in? && current_user.unread_conversations? %>
