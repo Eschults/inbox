@@ -62,6 +62,7 @@ var Inbox = React.createClass({
           conversations: data.conversations,
           messages: data.messages
         })
+        that.refs.createMessage.handleCancel()
       }
     })
   },
