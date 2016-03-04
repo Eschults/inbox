@@ -10,4 +10,20 @@ class ConversationsController < ApplicationController
     @unread_messages.each { |message| message.mark_as_read }
     @unread_conversations_count = current_user.unread_conversations_count
   end
+
+  def create
+    @selected_conversation = Conversation.new(conversation_params)
+    @selected_conversation.user1 = current_user
+    @selected_conversation.save
+    @message = Message.new(content: params[:message][:content], conversation: @selected_conversation)
+    @message.user = current_user
+    @message.save
+    @conversations = current_user.conversations
+  end
+
+  private
+
+  def conversation_params
+    params.require(:conversation).permit(:user2_id)
+  end
 end

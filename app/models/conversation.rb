@@ -1,7 +1,9 @@
 class Conversation < ActiveRecord::Base
   belongs_to :user1, class_name: "User"
   belongs_to :user2, class_name: "User"
-  has_many :messages
+  has_many :messages, dependent: :destroy
+
+  validates :user1, uniqueness: {scope: :user2}
 
   def users
     return [user1, user2]

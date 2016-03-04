@@ -4,6 +4,7 @@ JsRoutes.setup do |config|
 #     before restarting your `rails s`
   config.include = [
     /^conversations$/,
-    /^conversation_messages$/
+    /^conversation_messages$/,
+    /^users$/
   ]
 end

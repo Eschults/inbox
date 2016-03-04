@@ -9,7 +9,6 @@ var ConversationList = React.createClass({
                     key={index}
                     onConversationSelection={that.props.onConversationSelection}
                     selectedConversationId={that.props.selectedConversationId}
-                    // TODO props
                   />
         })}
         <div className="end-of-messages">

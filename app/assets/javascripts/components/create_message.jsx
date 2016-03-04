@@ -40,6 +40,10 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: true
     })
+    var that = this
+    setTimeout(function() {
+      that.refs.textarea.focus()
+    }, 100)
   },
 
   handleCancel: function() {
@@ -51,6 +55,10 @@ var CreateMessage = React.createClass({
   },
 
   createMessage: function() {
-    this.props.onMessageCreation(this.props.selectedConversationId, this.refs.textarea.value)
+    if (this.props.createConversation) {
+      this.props.onConversationCreation(this.refs.textarea.value)
+    } else {
+      this.props.onMessageCreation(this.props.selectedConversationId, this.refs.textarea.value)
+    }
   }
 })
