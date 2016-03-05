@@ -40,6 +40,7 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: true
     })
+    this.props.onTextareaFocus(true);
     var that = this
     setTimeout(function() {
       that.refs.textarea.focus()
@@ -50,6 +51,7 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: false
     })
+    this.props.onTextareaFocus(false);
     this.refs.textarea.value = ''
     this.refs.textarea.blur()
   },

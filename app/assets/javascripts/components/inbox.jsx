@@ -9,7 +9,8 @@ var Inbox = React.createClass({
       users: [],
       selectedUserIndex: null,
       selectedUserId: null,
-      createConversation: false
+      createConversation: false,
+      padded: false
     }
   },
 
@@ -20,6 +21,9 @@ var Inbox = React.createClass({
     })
     var inputClasses = classNames({
       "hidden": !this.state.selectUser
+    })
+    var wrapperClass = classNames({
+      "focused": this.state.padded
     })
     var userList
     if (this.state.selectUser) {
@@ -62,7 +66,7 @@ var Inbox = React.createClass({
                 </h4>
               </div>
               <div className="panel-body fixed-height">
-                <div id="wrapper">
+                <div className={wrapperClass} id="wrapper">
                   {userList}
                   <MessageList
                     messages={this.state.messages}
@@ -74,6 +78,7 @@ var Inbox = React.createClass({
                  ref="createMessage"
                  createConversation={this.state.createConversation}
                  onConversationCreation={this.handleConversationCreation}
+                 onTextareaFocus={this.handleWrapperPadding}
                 />
               </div>
             </div>
@@ -252,6 +257,14 @@ var Inbox = React.createClass({
     setTimeout(function() {
       that.selectUser()
     }, 100)
+  },
+
+  handleWrapperPadding: function(bool) {
+    if (bool) {
+      this.setState({padded: true})
+    } else {
+      this.setState({padded: false})
+    }
   },
 
   _user: function(userId) {
