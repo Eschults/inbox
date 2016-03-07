@@ -33,6 +33,8 @@ var CreateMessage = React.createClass({
   handleKeyUp: function(e) {
     if (e.which == 27) {
       this.handleCancel()
+    } else if (e.which === 13 && (e.metaKey || e.ctrlKey)) {
+      this.createMessage();
     }
   },
 

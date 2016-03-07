@@ -66,7 +66,7 @@ var Inbox = React.createClass({
                 </h4>
               </div>
               <div className="panel-body fixed-height">
-                <div className={wrapperClass} id="wrapper">
+                <div className={wrapperClass} id="wrapper" ref="wrapper">
                   {userList}
                   <MessageList
                     messages={this.state.messages}
@@ -105,6 +105,7 @@ var Inbox = React.createClass({
           selectedUserId: null
         })
         that.refs.createMessage.handleCancel()
+        that._scrollWrapper();
       }
     })
   },
@@ -124,6 +125,7 @@ var Inbox = React.createClass({
           selectUser: false
         })
         that.refs.createMessage.handleCancel()
+        that._scrollWrapper();
       }
     })
   },
@@ -147,6 +149,7 @@ var Inbox = React.createClass({
           createConversation: false
         })
         that.refs.createMessage.handleCancel()
+        that._scrollWrapper();
       }
     })
   },
@@ -163,6 +166,7 @@ var Inbox = React.createClass({
     setTimeout(function() {
       that.refs.input.focus();
       that.refs.createMessage.handleCancel();
+      that._scrollWrapper();
     }, 100)
   },
 
@@ -181,7 +185,6 @@ var Inbox = React.createClass({
   },
 
   handleKeyUp: function(e) {
-    console.log(e.which)
     if (e.which == 27) {
       this.setState({
         selectedConversationId: this.props.selected_conversation_id,
@@ -232,7 +235,6 @@ var Inbox = React.createClass({
     if (this._conversationId(this.state.selectedUserId)) {
       this.handleConversationSelection(this._conversationId(this.state.selectedUserId))
     } else {
-      debugger
       this.setState({
         users: [this.state.users[this.state.selectedUserIndex]],
         selectUser: false,
@@ -244,6 +246,7 @@ var Inbox = React.createClass({
     var that = this
     setTimeout(function() {
       that.refs.createMessage.handleClick()
+      that._scrollWrapper();
     }, 100)
   },
 
@@ -260,11 +263,11 @@ var Inbox = React.createClass({
   },
 
   handleWrapperPadding: function(bool) {
-    if (bool) {
-      this.setState({padded: true})
-    } else {
-      this.setState({padded: false})
-    }
+    this.setState({padded: bool})
+    var that = this
+    setTimeout(function() {
+      that._scrollWrapper();
+    })
   },
 
   _user: function(userId) {
@@ -285,5 +288,10 @@ var Inbox = React.createClass({
       }
     })
     return id
+  },
+
+  _scrollWrapper: function() {
+    var wrapper = this.refs.wrapper
+    wrapper.scrollTop = wrapper.scrollHeight
   }
 })

@@ -1,6 +1,6 @@
 .conversation-link {
   width: 100%;
-  max-height: 75px;
+  min-height: 75px;
   padding: 5px;
   border-bottom: 1px solid rgb(240, 240, 240);
   overflow: hidden;
@@ -223,6 +223,8 @@
   &.focused {
     padding-bottom: 159px;
   }
+  // display: flex;
+  // justify-content: flex-end;
 }
 .addConversation {
   padding: 3px 6px 1px 8px;

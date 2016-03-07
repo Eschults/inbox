@@ -4,6 +4,7 @@ class Conversation < ActiveRecord::Base
   has_many :messages, dependent: :destroy
 
   validates :user1, uniqueness: {scope: :user2}
+  validates :user1, :user2, presence: true
 
   def users
     return [user1, user2]
