@@ -88,6 +88,10 @@ var Inbox = React.createClass({
     )
   },
 
+  componentDidMount: function() {
+    this._scrollWrapper();
+  },
+
   handleConversationSelection: function(conversationId) {
     var that = this
     $.ajax({
@@ -105,7 +109,6 @@ var Inbox = React.createClass({
           selectedUserId: null
         })
         that.refs.createMessage.handleCancel()
-        that._scrollWrapper();
       }
     })
   },
@@ -125,7 +128,6 @@ var Inbox = React.createClass({
           selectUser: false
         })
         that.refs.createMessage.handleCancel()
-        that._scrollWrapper();
       }
     })
   },
@@ -149,7 +151,6 @@ var Inbox = React.createClass({
           createConversation: false
         })
         that.refs.createMessage.handleCancel()
-        that._scrollWrapper();
       }
     })
   },
@@ -179,7 +180,6 @@ var Inbox = React.createClass({
         that.setState({
           users: data.users
         })
-
       }
     })
   },
