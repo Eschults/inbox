@@ -185,6 +185,7 @@ var Inbox = React.createClass({
   },
 
   handleKeyUp: function(e) {
+    console.log(e.which)
     if (e.which == 27) {
       this.setState({
         selectedConversationId: this.props.selected_conversation_id,
