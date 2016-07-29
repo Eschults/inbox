@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
+gem 'redcarpet'
 
 gem 'js-routes'
 gem 'react-rails', '1.6.1'
