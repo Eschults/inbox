@@ -97,4 +97,3 @@ var CreateMessage = React.createClass({
     }
   }
 })
-
