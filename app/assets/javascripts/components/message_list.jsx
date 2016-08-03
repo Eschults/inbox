@@ -6,7 +6,6 @@ var MessageList = React.createClass({
           return <MessageListItem
                     message={message}
                     key={index}
-                    // TODO props
                   />
         })}
       </div>

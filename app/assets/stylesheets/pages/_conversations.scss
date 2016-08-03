@@ -185,10 +185,10 @@
       border-color: #5898f1;
       box-shadow: none;
       &.two-line {
-        height: 4em;
+        height: 4.2em;
       }
       &.three-line {
-        height: 5em;
+        height: 5.5em;
       }
     }
   }
@@ -226,9 +226,12 @@
   height: 100%;
   overflow: scroll;
   padding-bottom: 67px;
-  // &.focused {
-  //   padding-bottom: 159px;
-  // }
+  &.two-line {
+    padding-bottom: 84px;
+  }
+  &.three-line {
+    padding-bottom: 101px;
+  }
   // display: flex;
   // justify-content: flex-end;
 }

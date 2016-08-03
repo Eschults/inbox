@@ -10,7 +10,8 @@ var Inbox = React.createClass({
       selectedUserIndex: null,
       selectedUserId: null,
       createConversation: false,
-      padded: false
+      paddedTwoLine: false,
+      paddedThreeLine: false
     }
   },
 
@@ -23,7 +24,8 @@ var Inbox = React.createClass({
       "hidden": !this.state.selectUser
     })
     var wrapperClass = classNames({
-      "focused": this.state.padded
+      "two-line": this.state.paddedTwoLine,
+      "three-line": this.state.paddedThreeLine
     })
     var userList
     if (this.state.selectUser) {
