@@ -3,7 +3,7 @@ require 'redcarpet'
 module ApplicationHelper
   def render_markdown(text)
     return "" if text.blank?
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, quote: true)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, quote: true, fenced_code_blocks: true)
     rendered_markdown = markdown.render(text)
     raw rendered_markdown.gsub("<q>", "<blockquote>").gsub("</q>", "</blockquote>")
   end

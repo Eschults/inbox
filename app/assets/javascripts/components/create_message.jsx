@@ -1,18 +1,17 @@
 var CreateMessage = React.createClass({
   getInitialState: function() {
     return {
-      focused: false
+      focused: false,
+      twoLine: false,
+      threeLine: false
     }
   },
 
   render: function() {
     var textareaClasses = classNames({
-      "focused": this.state.focused
-    })
-    var btnClasses = classNames({
-      "btn": true,
-      "flex-item": true,
-      "hidden": !this.state.focused
+      "focused": this.state.focused,
+      "two-line": this.state.focused && this.state.twoLine,
+      "three-line": this.state.focused && this.state.threeLine
     })
     return(
       <div className="message-input" id="newMessage">
@@ -21,22 +20,29 @@ var CreateMessage = React.createClass({
           ref='textarea'
           placeholder="Answer here..."
           onClick={this.handleClick}
+          onKeyDown={this.handleKeyDown}
           onKeyUp={this.handleKeyUp}></textarea>
-        <div className="actions flexbox-end">
-          <button className={btnClasses + " btn-stop"} onClick={this.handleCancel}>Cancel</button>
-          <button className={btnClasses + " btn-send"} onClick={this.createMessage}>Send</button>
-        </div>
       </div>
     )
   },
 
-  handleKeyUp: function(e) {
-    console.log(e.which);
+  handleKeyDown: function(e) {
     if (e.which == 27) {
       this.handleCancel()
     } else if (e.which === 13 && e.altKey) {
+      if (this.state.twoLine) {
+        this.setState({
+          twoLine: false,
+          threeLine: true
+        })
+      } else if (this.state.threeLine) {
+        return false
+      } else {
+        this.setState({twoLine: true})
+      }
       return false;
     } else if (e.which === 13) {
+      e.preventDefault();
       this.createMessage();
     }
   },
@@ -54,11 +60,29 @@ var CreateMessage = React.createClass({
 
   handleCancel: function() {
     this.setState({
-      focused: false
+      focused: false,
+      twoLine: false,
+      threeLine: false
     })
     this.props.onTextareaFocus(false);
     this.refs.textarea.value = ''
     this.refs.textarea.blur()
+  },
+
+  handleKeyUp: function() {
+    var text = this.refs.textarea.value;
+    var count = (text.match(/\n/g) || []).length;
+    if (count === 0) {
+      this.setState({
+        twoLine: false,
+        threeLine: false
+      })
+    } else if (count === 1) {
+      this.setState({
+        twoLine: true,
+        threeLine: false
+      })
+    }
   },
 
   createMessage: function() {

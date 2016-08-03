@@ -10,7 +10,7 @@ var MessageListItem = React.createClass({
             <li><h6>{this.props.message.writer_first_name}</h6></li>
             <li className="date">{this.props.message.created_at}</li>
           </ul>
-          <span dangerouslySetInnerHTML={{__html: this.props.message.content}}></span>
+          <span className="markdown-body" dangerouslySetInnerHTML={{__html: this.props.message.content}}></span>
         </div>
       </div>
     )

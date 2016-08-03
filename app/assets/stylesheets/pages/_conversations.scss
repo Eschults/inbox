@@ -176,14 +176,20 @@
     border-radius: 3px;
     resize: none;
     padding: 10px;
-    height: 44px;
+    height: 3em;
     &:focus {
       outline: none;
     }
     &.focused {
-      height: 98px;
+      // height: 98px;
       border-color: #5898f1;
       box-shadow: none;
+      &.two-line {
+        height: 4em;
+      }
+      &.three-line {
+        height: 5em;
+      }
     }
   }
   .btn-send,
@@ -219,10 +225,10 @@
   min-height: 75vh;
   height: 100%;
   overflow: scroll;
-  padding-bottom: 68px;
-  &.focused {
-    padding-bottom: 159px;
-  }
+  padding-bottom: 67px;
+  // &.focused {
+  //   padding-bottom: 159px;
+  // }
   // display: flex;
   // justify-content: flex-end;
 }
