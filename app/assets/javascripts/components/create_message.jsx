@@ -35,14 +35,17 @@ var CreateMessage = React.createClass({
           twoLine: false,
           threeLine: true
         })
+        this.props.onTextareaLineBreak(3);
       } else if (this.state.threeLine) {
         return false
       } else {
         this.setState({twoLine: true})
+        this.props.onTextareaLineBreak(2);
       }
       return false;
     } else if (e.which === 13) {
       e.preventDefault();
+      this.props.onTextareaLineBreak(1);
       this.createMessage();
     }
   },
@@ -51,7 +54,6 @@ var CreateMessage = React.createClass({
     this.setState({
       focused: true
     })
-    this.props.onTextareaFocus(true);
     var that = this
     setTimeout(function() {
       that.refs.textarea.focus()
@@ -59,12 +61,12 @@ var CreateMessage = React.createClass({
   },
 
   handleCancel: function() {
+    this.props.onTextareaLineBreak(1);
     this.setState({
       focused: false,
       twoLine: false,
       threeLine: false
     })
-    this.props.onTextareaFocus(false);
     this.refs.textarea.value = ''
     this.refs.textarea.blur()
   },
@@ -77,11 +79,13 @@ var CreateMessage = React.createClass({
         twoLine: false,
         threeLine: false
       })
+      this.props.onTextareaLineBreak(1);
     } else if (count === 1) {
       this.setState({
         twoLine: true,
         threeLine: false
       })
+      this.props.onTextareaLineBreak(2);
     }
   },
 

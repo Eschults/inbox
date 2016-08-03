@@ -10,8 +10,8 @@ var Inbox = React.createClass({
       selectedUserIndex: null,
       selectedUserId: null,
       createConversation: false,
-      paddedTwoLine: false,
-      paddedThreeLine: false
+      twoLinePadded: false,
+      threeLinePadded: false
     }
   },
 
@@ -24,10 +24,10 @@ var Inbox = React.createClass({
       "hidden": !this.state.selectUser
     })
     var wrapperClass = classNames({
-      "two-line": this.state.paddedTwoLine,
-      "three-line": this.state.paddedThreeLine
+      "two-line": this.state.twoLinePadded,
+      "three-line": this.state.threeLinePadded
     })
-    var userList
+    var userList;
     if (this.state.selectUser) {
       userList = <UserList
                     users={this.state.users}
@@ -80,7 +80,7 @@ var Inbox = React.createClass({
                  ref="createMessage"
                  createConversation={this.state.createConversation}
                  onConversationCreation={this.handleConversationCreation}
-                 onTextareaFocus={this.handleWrapperPadding}
+                 onTextareaLineBreak={this.handleWrapperPadding}
                 />
               </div>
             </div>
@@ -129,7 +129,8 @@ var Inbox = React.createClass({
           messages: data.messages,
           selectUser: false
         })
-        that.refs.createMessage.handleCancel()
+        that.refs.createMessage.handleCancel();
+        that._scrollWrapper();
       }
     })
   },
@@ -265,9 +266,24 @@ var Inbox = React.createClass({
     }, 100)
   },
 
-  handleWrapperPadding: function(bool) {
-    this.setState({padded: bool})
-    var that = this
+  handleWrapperPadding: function(lineCount) {
+    if (lineCount === 1) {
+      this.setState({
+        twoLinePadded: false,
+        threeLinepadded: false
+      })
+    } else if (lineCount === 2) {
+      this.setState({
+        twoLinePadded: true,
+        threeLinePadded: false
+      })
+    } else if (lineCount === 3) {
+      this.setState({
+        twoLinePadded: false,
+        threeLinePadded: true
+      })
+    }
+    var that = this;
     setTimeout(function() {
       that._scrollWrapper();
     })
