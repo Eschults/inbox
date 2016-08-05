@@ -270,7 +270,7 @@ var Inbox = React.createClass({
     if (lineCount === 1) {
       this.setState({
         twoLinePadded: false,
-        threeLinepadded: false
+        threeLinePadded: false
       })
     } else if (lineCount === 2) {
       this.setState({
