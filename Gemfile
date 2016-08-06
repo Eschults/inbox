@@ -15,6 +15,8 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'redcarpet'
+gem 'pygmentize'
+gem 'sass-pygments-rails'
 
 gem 'js-routes'
 gem 'react-rails', '1.6.1'

@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
     @message.conversation = @selected_conversation
+    # @message.content = @message.content.gsub("\n", "  \n").gsub("  \n  \n", "\n\n")
     @message.save
     @conversations = current_user.conversations
   end
