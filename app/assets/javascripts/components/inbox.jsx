@@ -11,12 +11,13 @@ var Inbox = React.createClass({
       selectedUserId: null,
       createConversation: false,
       twoLinePadded: false,
-      threeLinePadded: false
+      threeLinePadded: false,
+      nextPage: this.props.page + 1
     }
   },
 
   render: function() {
-    var that = this
+    var that = this;
     var firstNameClasses = classNames({
       "hidden": this.state.selectUser
     })
@@ -36,8 +37,14 @@ var Inbox = React.createClass({
                     onUserSelection={this.handleUserSelection}
                   />
     }
+    var nextPageHref = "/conversations?page=" + this.state.nextPage;
     return(
       <div className="container">
+        <div className="hidden">
+          <span className="next">
+            <a href={nextPageHref}></a>
+          </span>
+        </div>
         <div className="row">
           <div className="col-sm-4" id="conversation-list">
             <div className="panel panel-default">
@@ -68,7 +75,7 @@ var Inbox = React.createClass({
                 </h4>
               </div>
               <div className="panel-body fixed-height">
-                <div className={wrapperClass} id="wrapper" ref="wrapper">
+                <div className={wrapperClass} id="wrapper" ref="wrapper" onScroll={this.handleScroll}>
                   {userList}
                   <MessageList
                     messages={this.state.messages}
@@ -95,7 +102,7 @@ var Inbox = React.createClass({
   },
 
   handleConversationSelection: function(conversationId) {
-    var that = this
+    var that = this;
     $.ajax({
       type: 'GET',
       url: Routes.conversations_path({format: 'json', conversation_id: conversationId}),
@@ -108,7 +115,8 @@ var Inbox = React.createClass({
           selectUser: false,
           users: [],
           selectedUserIndex: null,
-          selectedUserId: null
+          selectedUserId: null,
+          nextPage: parseInt(data.page) + 1
         })
         that.refs.createMessage.handleCancel()
       }
@@ -151,7 +159,8 @@ var Inbox = React.createClass({
           users: [],
           selectedUserIndex: null,
           selectedUserId: null,
-          createConversation: false
+          createConversation: false,
+          nextPage: parseInt(data.page) + 1
         })
         that.refs.createMessage.handleCancel()
       }
@@ -289,28 +298,51 @@ var Inbox = React.createClass({
     })
   },
 
+  handleScroll: function() {
+    var wrapper = this.refs.wrapper;
+    var baseUrl = $('.next a').attr('href');
+    if (baseUrl && wrapper.scrollTop === 0) {
+      var olderMessagesUrl = baseUrl + '&conversation_id=' + this.state.selectedConversationId;
+      var that = this;
+      $.ajax({
+        type: 'GET',
+        dataType: 'json',
+        url: olderMessagesUrl,
+        success: function(data) {
+          var allMessages = data.messages.concat(that.state.messages);
+          if (allMessages.length !== that.state.messages.length) {
+            that.setState({
+              messages: allMessages,
+              nextPage: parseInt(data.page) + 1
+            })
+          }
+        }
+      })
+    }
+  },
+
   _user: function(userId) {
-    var _user
+    var _user;
     this.state.users.map(function(user, index) {
       if (user.id == userId) {
-        _user = user
+        _user = user;
       }
     })
-    return _user
+    return _user;
   },
 
   _conversationId: function(userId) {
-    var id
+    var id;
     this.state.conversations.map(function(conversation, index) {
       if (conversation.user.id == userId) {
-        id = conversation.id
+        id = conversation.id;
       }
     })
-    return id
+    return id;
   },
 
   _scrollWrapper: function() {
-    var wrapper = this.refs.wrapper
-    wrapper.scrollTop = wrapper.scrollHeight
+    var wrapper = this.refs.wrapper;
+    wrapper.scrollTop = wrapper.scrollHeight;
   }
 })

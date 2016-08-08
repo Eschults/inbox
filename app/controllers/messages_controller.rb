@@ -6,6 +6,7 @@ class MessagesController < ApplicationController
     @message.conversation = @selected_conversation
     # @message.content = @message.content.gsub("\n", "  \n").gsub("  \n  \n", "\n\n")
     @message.save
+    @messages = @selected_conversation.messages.order(created_at: :desc).page(params[:page]).per(9)
     @conversations = current_user.conversations
   end
 
