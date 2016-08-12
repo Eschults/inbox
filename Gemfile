@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.3.1'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '5.0.0'
 gem 'pg'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
@@ -20,7 +20,7 @@ gem 'pygmentize'
 gem 'sass-pygments-rails'
 
 gem 'js-routes'
-gem 'react-rails', '1.6.1'
+gem 'react-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-classnames'
@@ -29,7 +29,6 @@ end
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
-  gem 'quiet_assets'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'spring'

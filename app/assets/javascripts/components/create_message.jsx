@@ -42,7 +42,7 @@ var CreateMessage = React.createClass({
         this.setState({twoLine: true})
         this.props.onTextareaLineBreak(2);
       }
-      return false;
+      this.refs.textarea.value += "\n"
     } else if (e.which === 13) {
       e.preventDefault();
       this.props.onTextareaLineBreak(1);

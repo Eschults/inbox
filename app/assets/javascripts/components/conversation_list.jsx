@@ -12,7 +12,7 @@ var ConversationList = React.createClass({
                   />
         })}
         <div className="end-of-messages">
-          <p>End of messages</p>
+          <p>Made with <i className="fa fa-heart"></i> at Le Wagon</p>
         </div>
       </div>
     )
