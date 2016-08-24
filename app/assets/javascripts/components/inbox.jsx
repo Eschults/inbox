@@ -321,6 +321,38 @@ var Inbox = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    this.setupSubscription();
+    this._scrollWrapper();
+  },
+
+  updateMessageList: function(data) {
+    this.setState({
+      messages: this.state.messages.concat([data.message]),
+      conversations: data.conversations
+    })
+    this._scrollWrapper();
+  },
+
+  setupSubscription: function() {
+    App.messages = App.cable.subscriptions.create('MessagesChannel', {
+      received: function(data) {
+        this.updateMessageList(data);
+      },
+
+      connected: function() {
+        // Timeout here is needed to make sure Subscription
+        // is setup properly, before we do any actions.
+        var that = this;
+        setTimeout(function() {
+          that.perform('follow')
+        }, 1000);
+      },
+
+      updateMessageList: this.updateMessageList
+    });
+  },
+
   _user: function(userId) {
     var _user;
     this.state.users.map(function(user, index) {

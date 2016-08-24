@@ -1,5 +1,6 @@
 class MessagesChannel < ApplicationCable::Channel
-  def subscribed
+  def follow
+    stop_all_streams
     stream_from 'messages'
   end
 end
