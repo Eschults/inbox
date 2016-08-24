@@ -13,3 +13,5 @@ json.messages do
     json.partial! "conversations/message", message: message
   end
 end
+
+json.user_id current_user.id

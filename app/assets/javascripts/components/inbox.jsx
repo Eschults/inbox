@@ -327,17 +327,27 @@ var Inbox = React.createClass({
   },
 
   updateMessageList: function(data) {
-    this.setState({
-      messages: this.state.messages.concat([data.message]),
-      conversations: data.conversations
-    })
+    if (this.props.user_id === data.sender_id) {
+      this.setState({
+        messages: this.state.messages.concat([data.message]),
+        conversations: data.sender_conversations
+      })
+    } else {
+      this.setState({
+        messages: this.state.messages.concat([data.message]),
+        conversations: data.receiver_conversations
+      })
+    }
     this._scrollWrapper();
   },
 
   setupSubscription: function() {
+    var that = this;
     App.messages = App.cable.subscriptions.create('MessagesChannel', {
       received: function(data) {
-        this.updateMessageList(data);
+        if (that.state.selectedConversationId === data.message.conversation_id) {
+          this.updateMessageList(data);
+        }
       },
 
       connected: function() {
