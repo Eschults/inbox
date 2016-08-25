@@ -36,6 +36,9 @@
     background-color: rgb(251, 251, 251);
   }
 }
+.unread {
+  background-color: #F7F7F7;
+}
 .selected,
 .selected:hover {
   background-color: #3A5795;
@@ -44,9 +47,6 @@
   .date {
     color: white;
   }
-}
-.unread-messages {
-  background-color: rgb(251, 251, 251);
 }
 .panel-body {
   position: relative;

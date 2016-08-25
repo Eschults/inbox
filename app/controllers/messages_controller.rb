@@ -9,7 +9,17 @@ class MessagesController < ApplicationController
     @messages = @selected_conversation.messages.order(created_at: :desc).page(params[:page]).per(9)
     @conversations = current_user.conversations
     other_user = @selected_conversation.other_user(current_user)
-    ActionCable.server.broadcast('messages', {
+    ActionCable.server.broadcast('messages', action_cable_params)
+  end
+
+  private
+
+  def message_params
+    params.require(:message).permit(:content)
+  end
+
+  def action_cable_params
+    {
       message: {
         id: @message.id,
         read_at: @message.read_at,
@@ -44,12 +54,6 @@ class MessagesController < ApplicationController
           user: conversation.other_user(other_user)
         }
       end
-    })
-  end
-
-  private
-
-  def message_params
-    params.require(:message).permit(:content)
+    }
   end
 end

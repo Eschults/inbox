@@ -3,7 +3,8 @@ var ConversationListItem = React.createClass({
     var divClasses = classNames({
       "conversation-link": true,
       "flexbox-start": true,
-      "selected": this.props.conversation.id == this.props.selectedConversationId
+      "selected": this.props.conversation.id === this.props.selectedConversationId,
+      "unread": this.props.conversation.last_message_read_at === null && !this.props.conversation.is_last_message_writer_current_user
     })
     var iClasses = classNames({
       "fa": this.props.conversation.is_last_message_writer_current_user,

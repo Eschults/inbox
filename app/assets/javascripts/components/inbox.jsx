@@ -327,16 +327,24 @@ var Inbox = React.createClass({
   },
 
   updateMessageList: function(data) {
+    // if current_user is the sender, update message list and conversation list
     if (this.props.user_id === data.sender_id) {
       this.setState({
         messages: this.state.messages.concat([data.message]),
         conversations: data.sender_conversations
       })
+    // if current_user is the receiver, update conversation list and message list only if selected conversation is new message's conversation
     } else {
-      this.setState({
-        messages: this.state.messages.concat([data.message]),
-        conversations: data.receiver_conversations
-      })
+      if (this.state.selectedConversationId === data.message.conversation_id) {
+        this.setState({
+          messages: this.state.messages.concat([data.message]),
+          conversations: data.receiver_conversations
+        })
+      } else {
+        this.setState({
+          conversations: data.receiver_conversations
+        })
+      }
     }
     this._scrollWrapper();
   },
@@ -345,7 +353,10 @@ var Inbox = React.createClass({
     var that = this;
     App.messages = App.cable.subscriptions.create('MessagesChannel', {
       received: function(data) {
-        if (that.state.selectedConversationId === data.message.conversation_id) {
+        var conversationIds = that.state.conversations.map(function(conversation) {
+          return conversation.id;
+        })
+        if (conversationIds.includes(data.message.conversation_id)) {
           this.updateMessageList(data);
         }
       },
