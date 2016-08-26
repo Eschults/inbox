@@ -327,19 +327,15 @@ var Inbox = React.createClass({
   },
 
   updateMessageList: function(data) {
-    // if current_user is the sender, update message list and conversation list
-    if (this.props.user_id === data.sender_id) {
-      this.setState({
-        messages: this.state.messages.concat([data.message]),
-        conversations: data.sender_conversations
-      })
     // if current_user is the receiver, update conversation list and message list only if selected conversation is new message's conversation
-    } else {
+    if (this.props.user_id === data.receiver_id) {
+      // if current_user is currently on the updated conversation, append message and update conversation list
       if (this.state.selectedConversationId === data.message.conversation_id) {
         this.setState({
           messages: this.state.messages.concat([data.message]),
           conversations: data.receiver_conversations
         })
+      // if he's not on the updated conversation, update conversation list
       } else {
         this.setState({
           conversations: data.receiver_conversations
@@ -353,12 +349,10 @@ var Inbox = React.createClass({
     var that = this;
     App.messages = App.cable.subscriptions.create('MessagesChannel', {
       received: function(data) {
-        var conversationIds = that.state.conversations.map(function(conversation) {
-          return conversation.id;
-        })
-        if (conversationIds.includes(data.message.conversation_id)) {
+        if (data.receiver_id === that.props.user_id) {
           this.updateMessageList(data);
         }
+        debugger
       },
 
       connected: function() {
