@@ -352,7 +352,6 @@ var Inbox = React.createClass({
         if (data.receiver_id === that.props.user_id) {
           this.updateMessageList(data);
         }
-        debugger
       },
 
       connected: function() {
