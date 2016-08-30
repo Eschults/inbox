@@ -1,7 +1,13 @@
 var MessageListItem = React.createClass({
   render: function() {
+    var messageContainerClasses = classNames({
+      "message-container": true,
+      "flexbox-start": true,
+      "flex-item": true,
+      "preview": this.props.message.id === null
+    })
     return(
-      <div className="message-container flexbox-start flex-item">
+      <div className={messageContainerClasses}>
         <span className="flex-item-shrink">
           <img src={this.props.message.writer_avatar_url} className="avatar-square-small" />
         </span>

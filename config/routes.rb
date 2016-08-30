@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
   resources :users, only: :index
 
+  get 'conversations/:conversation_id/preview' => 'messages#preview', as: :preview
+
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
 end

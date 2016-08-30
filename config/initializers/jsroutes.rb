@@ -5,6 +5,7 @@ JsRoutes.setup do |config|
   config.include = [
     /^conversations$/,
     /^conversation_messages$/,
-    /^users$/
+    /^users$/,
+    /^preview$/
   ]
 end

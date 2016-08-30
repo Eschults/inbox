@@ -73,6 +73,8 @@ var CreateMessage = React.createClass({
 
   handleKeyUp: function() {
     var text = this.refs.textarea.value;
+    // trigger messages#preview
+    this.props.onMessageTyping(text);
     var count = (text.match(/\n/g) || []).length;
     if (count === 0) {
       this.setState({

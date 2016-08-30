@@ -88,6 +88,7 @@ var Inbox = React.createClass({
                  createConversation={this.state.createConversation}
                  onConversationCreation={this.handleConversationCreation}
                  onTextareaLineBreak={this.handleWrapperPadding}
+                 onMessageTyping={this.handleMessagePreview}
                 />
               </div>
             </div>
@@ -164,6 +165,20 @@ var Inbox = React.createClass({
         })
         that.refs.createMessage.handleCancel()
       }
+    })
+  },
+
+  handleMessagePreview: function(content) {
+    var that = this;
+    $.ajax({
+      type: 'GET',
+      url: Routes.preview_path({
+        format: 'json',
+        conversation_id: this.state.selectedConversationId,
+        message: {
+          content: content
+        }
+      })
     })
   },
 
@@ -326,14 +341,57 @@ var Inbox = React.createClass({
     this._scrollWrapper();
   },
 
-  updateMessageList: function(data) {
+  updateMessageListAfterCreation: function(data) {
     // if current_user is the receiver, update conversation list and message list only if selected conversation is new message's conversation
     if (this.props.user_id === data.receiver_id) {
       // if current_user is currently on the updated conversation, append message and update conversation list
       if (this.state.selectedConversationId === data.message.conversation_id) {
         this.setState({
-          messages: this.state.messages.concat([data.message]),
+          messages: this.state.messages.filter(function(message) {
+            if (message.id === null) {
+              return false
+            } else {
+              return true
+            }
+          }).concat([data.message]),
           conversations: data.receiver_conversations
+        })
+      // if he's not on the updated conversation, update conversation list
+      } else {
+        this.setState({
+          conversations: data.receiver_conversations
+        })
+      }
+    }
+    this._scrollWrapper();
+  },
+
+  updateMessageListForPreview: function(data) {
+    // if current_user is the receiver, update conversation list and message list only if selected conversation is new message's conversation
+    if (this.props.user_id === data.receiver_id) {
+      // if current_user is currently on the updated conversation, append message and update conversation list
+      if (this.state.selectedConversationId === data.message.conversation_id) {
+        var messages;
+        if (data.message.content === "") {
+          messages = this.state.messages.filter(function(message) {
+            if (message.id === null) {
+              return false
+            } else {
+              return true
+            }
+          });
+        } else {
+          messages = this.state.messages.filter(function(message) {
+            if (message.id === null) {
+              return false
+            } else {
+              return true
+            }
+          }).concat([data.message])
+        }
+        this.setState({
+          messages: messages
+          // conversations: data.receiver_conversations
         })
       // if he's not on the updated conversation, update conversation list
       } else {
@@ -350,7 +408,7 @@ var Inbox = React.createClass({
     App.messages = App.cable.subscriptions.create('MessagesChannel', {
       received: function(data) {
         if (data.receiver_id === that.props.user_id) {
-          this.updateMessageList(data);
+          this.updateMessageListAfterCreation(data);
         }
       },
 
@@ -363,7 +421,25 @@ var Inbox = React.createClass({
         }, 1000);
       },
 
-      updateMessageList: this.updateMessageList
+      updateMessageListAfterCreation: this.updateMessageListAfterCreation
+    });
+    App.messages = App.cable.subscriptions.create('PreviewsChannel', {
+      received: function(data) {
+        if (data.receiver_id === that.props.user_id) {
+          this.updateMessageListForPreview(data);
+        }
+      },
+
+      connected: function() {
+        // Timeout here is needed to make sure Subscription
+        // is setup properly, before we do any actions.
+        var that = this;
+        setTimeout(function() {
+          that.perform('follow')
+        }, 1000);
+      },
+
+      updateMessageListForPreview: this.updateMessageListForPreview
     });
   },
 
