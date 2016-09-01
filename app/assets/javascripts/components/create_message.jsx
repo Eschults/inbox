@@ -28,7 +28,10 @@ var CreateMessage = React.createClass({
 
   handleKeyDown: function(e) {
     if (e.which == 27) {
-      this.handleCancel()
+      this.handleCancel();
+      var text = this.refs.textarea.value;
+      // trigger messages#preview
+      this.props.onMessageTyping(text);
     } else if (e.which === 13 && e.altKey) {
       if (this.state.twoLine) {
         this.setState({
@@ -47,6 +50,10 @@ var CreateMessage = React.createClass({
       e.preventDefault();
       this.props.onTextareaLineBreak(1);
       this.createMessage();
+    } else if (e.which === 8) {
+      var text = this.refs.textarea.value;
+      // trigger messages#preview
+      this.props.onMessageTyping(text);
     }
   },
 
