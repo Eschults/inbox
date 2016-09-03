@@ -192,17 +192,19 @@ var Inbox = React.createClass({
   },
 
   handleMessagePreview: function(content) {
-    var that = this;
-    $.ajax({
-      type: 'GET',
-      url: Routes.preview_path({
-        format: 'json',
-        conversation_id: this.state.selectedConversationId,
-        message: {
-          content: content
-        }
+    if (this.state.conversation_id) {
+      var that = this;
+      $.ajax({
+        type: 'GET',
+        url: Routes.preview_path({
+          format: 'json',
+          conversation_id: this.state.selectedConversationId,
+          message: {
+            content: content
+          }
+        })
       })
-    })
+    }
   },
 
   showInput: function() {
