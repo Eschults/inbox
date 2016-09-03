@@ -1,12 +1,14 @@
 // Graphical variables
 @import "config/variables";
 @import "config/bootstrap_variables";
+@import "config/markdown";
 
 // External libraries
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "pygments/default"; // Themes: https://github.com/vicentereig/sass-pygments-rails/tree/master/vendor/assets/stylesheets/pygments
 
 // Your CSS
 @import "layout/index";

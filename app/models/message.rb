@@ -6,6 +6,8 @@ class Message < ActiveRecord::Base
   validates :conversation, presence: true
   validates :user, inclusion: { in: :users }
 
+  # after_create { MessageRelayJob.perform_later(self.id) }
+
   def mark_as_read
     self.read_at = DateTime.now
     self.save

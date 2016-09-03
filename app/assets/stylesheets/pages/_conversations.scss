@@ -1,8 +1,8 @@
 .conversation-link {
   width: 100%;
-  max-height: 75px;
+  min-height: 75px;
   padding: 5px;
-  border-bottom: 1px solid rgb(240, 240, 240);
+  border-bottom: 1px solid #eee;
   overflow: hidden;
   .conversation-header {
     width: 100%;
@@ -33,20 +33,20 @@
   }
   &:hover {
     cursor: pointer;
-    background-color: rgb(251, 251, 251);
+    background-color: $hover-grey;
   }
+}
+.unread {
+  background-color: #F7F7F7;
 }
 .selected,
 .selected:hover {
-  background-color: #3A5795;
+  background-color: $dark-blue;
   color: white;
   h6,
   .date {
     color: white;
   }
-}
-.unread-messages {
-  background-color: rgb(251, 251, 251);
 }
 .panel-body {
   position: relative;
@@ -116,7 +116,7 @@
   font-size: 13px;
   text-align: center;
   color: #d9d9d9;
-  border-bottom: 1px solid rgb(240, 240, 240);
+  // border-bottom: 1px solid #eee;
   width: 100%;
   p {
     margin-top: 10px;
@@ -160,7 +160,10 @@
   }
 }
 .messages {
-  width: 100%
+  width: 100%;
+  .preview {
+    background-color: $light-blue;
+  }
 }
 .message-input {
   background-color: white;
@@ -176,14 +179,20 @@
     border-radius: 3px;
     resize: none;
     padding: 10px;
-    height: 44px;
+    height: 3em;
     &:focus {
       outline: none;
     }
     &.focused {
-      height: 98px;
+      // height: 98px;
       border-color: #5898f1;
       box-shadow: none;
+      &.two-line {
+        height: 4.2em;
+      }
+      &.three-line {
+        height: 5.5em;
+      }
     }
   }
   .btn-send,
@@ -219,8 +228,62 @@
   min-height: 75vh;
   height: 100%;
   overflow: scroll;
-  padding-bottom: 61px;
-  &.focused {
-    padding-bottom: 159px;
+  padding-bottom: 67px;
+  &.two-line {
+    padding-bottom: 83px;
+  }
+  &.three-line {
+    padding-bottom: 101px;
+  }
+  .next {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    a {
+      color: #315D91;
+    }
+  }
+}
+.addConversation {
+  padding: 3px 6px 1px 8px;
+  background-color: white;
+  border: 1px solid #CBCACB;
+  border-radius: 3px;
+  float: right;
+  color: #808080;
+  margin-top: -2px;
+  &:hover,
+  &:focus,
+  &:active, {
+    background-color: #F5F5F5;
+    cursor: pointer;
+  }
+}
+.firstNameInput {
+  height: 19px;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}
+.user {
+  padding: 10px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  &:hover {
+    background-color: #3A5795;
+    color: white;
+    cursor: pointer;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .user-avatar {
+    flex: 0 0 auto;
+  }
+  .user-name {
+    flex: 1 0 auto;
+    padding-left: 10px;
   }
 }

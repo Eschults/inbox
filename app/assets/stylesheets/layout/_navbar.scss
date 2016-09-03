@@ -122,8 +122,8 @@
   padding: 10px 20px;
 }
 .navbar-wagon-dropdown-menu li > a:hover {
-  background: transparent !important;
-  color: black !important;
+  background: $hover-grey;
+  color: white;
 }
 .navbar-wagon-dropdown-menu:before {
   content: ' ';
