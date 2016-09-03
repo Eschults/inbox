@@ -6,10 +6,12 @@ class ConversationsController < ApplicationController
     else
       @selected_conversation = @conversations.first
     end
-    @unread_messages = @selected_conversation.unread_messages(current_user)
-    @unread_messages.each { |message| message.mark_as_read }
+    if @selected_conversation
+      @unread_messages = @selected_conversation.unread_messages(current_user)
+      @unread_messages.each { |message| message.mark_as_read }
+      @messages = @selected_conversation.messages.order(created_at: :desc).page(params[:page]).per(9)
+    end
     @unread_conversations_count = current_user.unread_conversations_count
-    @messages = @selected_conversation.messages.order(created_at: :desc).page(params[:page]).per(9)
   end
 
   def create
