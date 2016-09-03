@@ -9,6 +9,7 @@ gem 'devise'
 gem 'kaminari'
 gem 'redis', '~> 3.0'
 gem 'puma'
+gem 'omniauth-facebook'
 
 gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
