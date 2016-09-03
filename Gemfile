@@ -35,8 +35,3 @@ group :development, :test do
   gem 'pry-rails'
   gem 'spring'
 end
-
-group :production do
-  gem 'rails_12factor'
-  gem 'puma'
-end
