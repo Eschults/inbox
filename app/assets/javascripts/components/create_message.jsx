@@ -39,8 +39,6 @@ var CreateMessage = React.createClass({
           threeLine: true
         })
         this.props.onTextareaLineBreak(3);
-      } else if (this.state.threeLine) {
-        return false
       } else {
         this.setState({twoLine: true})
         this.props.onTextareaLineBreak(2);
