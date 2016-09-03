@@ -33,7 +33,7 @@
   }
   &:hover {
     cursor: pointer;
-    background-color: rgb(251, 251, 251);
+    background-color: $hover-grey;
   }
 }
 .unread {
@@ -41,7 +41,7 @@
 }
 .selected,
 .selected:hover {
-  background-color: #3A5795;
+  background-color: $dark-blue;
   color: white;
   h6,
   .date {
@@ -162,7 +162,7 @@
 .messages {
   width: 100%;
   .preview {
-    background-color: #F2F9FC;
+    background-color: $light-blue;
   }
 }
 .message-input {
@@ -235,8 +235,14 @@
   &.three-line {
     padding-bottom: 101px;
   }
-  // display: flex;
-  // justify-content: flex-end;
+  .next {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    a {
+      color: #315D91;
+    }
+  }
 }
 .addConversation {
   padding: 3px 6px 1px 8px;

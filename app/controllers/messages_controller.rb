@@ -31,7 +31,7 @@ class MessagesController < ApplicationController
       message: {
         id: @message.id,
         read_at: @message.read_at,
-        writer_avatar_url: @message.user.avatar_url,
+        writer_avatar_url: @message.user.one_avatar_url,
         writer_first_name: @message.user.first_name,
         created_at: "Now typing",
         content: view_context.render_markdown(@message.content),

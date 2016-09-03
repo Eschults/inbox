@@ -43,11 +43,11 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 .panel-default > .panel-heading {
-  background-color: #F2F9FC;
+  background-color: $light-blue;
   border-bottom: 1px solid #c9e6f2;
 }
 body {
   color: #777777;
   font-size: 14px;
-  background-color: #FAFAFA;
+  background-color: $background-grey;
 }

@@ -12,7 +12,8 @@ var Inbox = React.createClass({
       createConversation: false,
       twoLinePadded: false,
       threeLinePadded: false,
-      nextPage: this.props.page + 1
+      nextPage: this.props.page + 1,
+      frozenScroll: false
     }
   },
 
@@ -38,6 +39,12 @@ var Inbox = React.createClass({
                   />
     }
     var nextPageHref = "/conversations?page=" + this.state.nextPage;
+    var loadOlder;
+    if (this.state.frozenScroll) {
+      loadOlder = <div className="next">
+                    <a href={nextPageHref} onClick={this.loadOlderMessages}>Load older messages</a>
+                  </div>
+    }
     return(
       <div className="container">
         <div className="hidden">
@@ -75,10 +82,12 @@ var Inbox = React.createClass({
                 </h4>
               </div>
               <div className="panel-body fixed-height">
-                <div className={wrapperClass} id="wrapper" ref="wrapper" onScroll={this.handleScroll}>
+                <div className={wrapperClass} id="wrapper" ref="wrapper" onScroll={this.loadOlderMessages}>
                   {userList}
+                  {loadOlder}
                   <MessageList
                     messages={this.state.messages}
+                    ref="messageList"
                   />
                 </div>
                 <CreateMessage
@@ -99,7 +108,21 @@ var Inbox = React.createClass({
   },
 
   componentDidMount: function() {
+    console.log('componentInboxDidMount');
+    this.setupSubscription();
     this._scrollWrapper();
+    // if ($("#wrapper").height() > $(".messages").height()) {
+    //   this.setState({ frozenScroll: true });
+    // }
+  },
+
+  componentDidUpdate: function() {
+    console.log('componentInboxDidUpdate');
+    // if ($("#wrapper").height() > ($(".messages").height() + 66 + 39) && !this.state.frozenScroll) {
+    //   this.setState({ frozenScroll: true });
+    // } else if ($("#wrapper").height() < $(".messages").height() && this.state.frozenScroll) {
+    //   this.setState({ frozenScroll: false });
+    // }
   },
 
   handleConversationSelection: function(conversationId) {
@@ -119,7 +142,7 @@ var Inbox = React.createClass({
           selectedUserId: null,
           nextPage: parseInt(data.page) + 1
         })
-        that.refs.createMessage.handleCancel()
+        that.refs.createMessage.handleCancel();
       }
     })
   },
@@ -163,7 +186,7 @@ var Inbox = React.createClass({
           createConversation: false,
           nextPage: parseInt(data.page) + 1
         })
-        that.refs.createMessage.handleCancel()
+        that.refs.createMessage.handleCancel();
       }
     })
   },
@@ -195,24 +218,23 @@ var Inbox = React.createClass({
       that.refs.input.focus();
       that.refs.createMessage.handleCancel();
       that._scrollWrapper();
-    }, 100)
+    }, 100);
   },
 
   suggestUsers: function() {
-    var that = this
+    var that = this;
     $.ajax({
       type: 'GET',
       url: Routes.users_path({format: 'json', query: that.refs.input.value}),
       success: function(data) {
         that.setState({
           users: data.users
-        })
+        });
       }
-    })
+    });
   },
 
   handleKeyUp: function(e) {
-    console.log(e.which)
     if (e.which == 27) {
       this.setState({
         selectedConversationId: this.props.selected_conversation_id,
@@ -255,7 +277,7 @@ var Inbox = React.createClass({
         selectedUserId: null
       })
     } else if (e.which == 13) {
-      this.selectUser()
+      this.selectUser();
     }
   },
 
@@ -275,7 +297,7 @@ var Inbox = React.createClass({
     setTimeout(function() {
       that.refs.createMessage.handleClick()
       that._scrollWrapper();
-    }, 100)
+    }, 100);
   },
 
   handleUserSelection: function(userId) {
@@ -283,11 +305,11 @@ var Inbox = React.createClass({
       users: [this._user(userId)],
       selectedUserIndex: 0,
       selectedUserId: userId
-    })
+    });
     var that = this
     setTimeout(function() {
-      that.selectUser()
-    }, 100)
+      that.selectUser();
+    }, 100);
   },
 
   handleWrapperPadding: function(lineCount) {
@@ -313,7 +335,8 @@ var Inbox = React.createClass({
     })
   },
 
-  handleScroll: function() {
+  loadOlderMessages: function(e) {
+    e.preventDefault();
     var wrapper = this.refs.wrapper;
     var baseUrl = $('.next a').attr('href');
     if (baseUrl && wrapper.scrollTop === 0) {
@@ -336,10 +359,6 @@ var Inbox = React.createClass({
     }
   },
 
-  componentDidMount: function() {
-    this.setupSubscription();
-    this._scrollWrapper();
-  },
 
   updateMessageListAfterCreation: function(data) {
     // if current_user is the receiver, update conversation list and message list only if selected conversation is new message's conversation
@@ -411,7 +430,6 @@ var Inbox = React.createClass({
           this.updateMessageListAfterCreation(data);
         }
       },
-
       connected: function() {
         // Timeout here is needed to make sure Subscription
         // is setup properly, before we do any actions.
@@ -420,7 +438,6 @@ var Inbox = React.createClass({
           that.perform('follow')
         }, 1000);
       },
-
       updateMessageListAfterCreation: this.updateMessageListAfterCreation
     });
     App.messages = App.cable.subscriptions.create('PreviewsChannel', {
@@ -429,7 +446,6 @@ var Inbox = React.createClass({
           this.updateMessageListForPreview(data);
         }
       },
-
       connected: function() {
         // Timeout here is needed to make sure Subscription
         // is setup properly, before we do any actions.
