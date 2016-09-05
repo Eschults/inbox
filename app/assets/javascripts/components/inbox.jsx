@@ -192,7 +192,7 @@ var Inbox = React.createClass({
   },
 
   handleMessagePreview: function(content) {
-    if (this.state.conversation_id) {
+    if (this.state.selectedConversationId) {
       var that = this;
       $.ajax({
         type: 'GET',
