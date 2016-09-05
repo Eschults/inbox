@@ -1,4 +1,4 @@
-edward = User.create!(email: "edward@lewagon.com", password: "azertyuiop", first_name: "Edward", avatar_url: "http://graph.facebook.com/10152948868146275/picture")
+edward = User.create!(email: "edward@lewagon.com", password: "azertyuiop", first_name: "Edward", avatar_url: "https://graph.facebook.com/v2.6/10153945596946275/picture?width=64&height=64")
 boris = User.create!(email: "boris@lewagon.com", password: "azertyuiop", first_name: "Boris", avatar_url: "https://avatars.githubusercontent.com/u/2471555?v=3")
 seb = User.create!(email: "seb@lewagon.com", password: "azertyuiop", first_name: "Seb", avatar_url: "https://avatars.githubusercontent.com/u/414418?v=3")
 romain = User.create!(email: "romain@lewagon.com", password: "azertyuiop", first_name: "Romain", avatar_url: "https://avatars.githubusercontent.com/u/6377103?v=3")

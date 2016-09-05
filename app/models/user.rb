@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def one_avatar_url
-    avatar_url ? avatar_url : "http://placehold.it/64x64"
+    avatar_url ? avatar_url : "https://placehold.it/64x64"
   end
 
   def self.find_for_facebook_oauth(auth)
