@@ -73,7 +73,6 @@ var CreateMessage = React.createClass({
       threeLine: false
     })
     this.refs.textarea.value = ''
-    this.refs.textarea.blur()
   },
 
   handleKeyUp: function() {
