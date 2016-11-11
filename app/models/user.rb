@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_oauth(auth)
+    puts auth
     user_params = auth.to_h.slice(:provider, :uid)
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
     user_params[:avatar_url] = auth.info.image
@@ -44,7 +45,7 @@ class User < ActiveRecord::Base
     else
       user = User.new(user_params)
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
-      user.save
+      user.save!
     end
 
     return user
